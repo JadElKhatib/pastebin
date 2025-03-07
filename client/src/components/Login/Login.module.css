@@ -1,0 +1,111 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../assets/spacejunk.jpg");
+  background-size: cover;
+}
+
+.mainContainer {
+  width: 500px;
+  height: 500px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
+}
+
+.mainContainer::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  box-shadow: inset 0 0 2000px rgba(0, 0, 0, 1);
+  background-color: rgba(0, 9, 43, 0.912);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 5;
+}
+
+.loginContainer h1 {
+  margin-left: 25px;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 100;
+  font-size: 42px;
+  letter-spacing: 23px;
+}
+
+.loginContainer h1.stretch {
+  display: inline-block;
+  -webkit-transform: scale(1, 1.5);
+  transform: scale(1, 1.5);
+}
+
+.loginInput {
+  width: 350px;
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid rgb(0, 97, 166);
+  background-color: transparent;
+  outline: none;
+  color: whitesmoke;
+  font-size: 1.3rem;
+}
+
+.loginInput::placeholder {
+  color: rgba(255, 255, 255, 0.503);
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.links span {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(205, 205, 205);
+}
+
+.links span:hover {
+  text-decoration: underline;
+  color: rgb(0, 117, 201);
+  cursor: pointer;
+}
+
+.loginBtn {
+  padding: 7px 50px;
+  font-size: 1rem;
+  background-color: rgb(0, 68, 215);
+  border: none;
+  border-radius: 5px;
+  color: rgb(210, 210, 210);
+  cursor: pointer;
+}
+
+.loginBtn:hover {
+  background-color: rgb(0, 52, 164);
+}
