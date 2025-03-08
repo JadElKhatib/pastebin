@@ -6,9 +6,45 @@ export const Home = () => {
     const location = useLocation();
     const { user } = location.state || {};
     const navigate = useNavigate();
+    const userData = {
+        username: user.username,
+        password: user.password,
+        pasteinfo: "",
+    };
 
     const Edit = () => {
         navigate("/home/edit", { state: { user: user } });
+    };
+
+    const Delete = () => {
+        const isConfirmed = window.confirm(
+            "Are you sure you want to delete your paste?"
+        );
+        if (isConfirmed) {
+            fetch(`http://localhost:3000/users/${user.userid}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            })
+                .then((res) => {
+                    if (!res.ok) {
+                        throw new Error(`error, status: ${res.status}`);
+                    }
+                    return res.json();
+                })
+                .then(() => {
+                    navigate("/home", {
+                        state: {
+                            user: { ...user, pasteinfo: userData.pasteinfo },
+                        },
+                    });
+                })
+                .catch((err) => {
+                    console.error("Failed to update user:", err);
+                });
+        }
     };
 
     return (
@@ -16,20 +52,21 @@ export const Home = () => {
             <div className={styles.mainContainer}>
                 <div className={styles.content}>
                     <div className={styles.paste}>
-                        {user.pasteinfo.split('\n').map((line,index) => {
+                        {user.pasteinfo.split("\n").map((line, index) => {
                             return (
                                 <span key={index}>
                                     {line}
-                                    <br/>
+                                    <br />
                                 </span>
-                            )
+                            );
                         })}
-
                     </div>
                     <button className={styles.editBtn} onClick={Edit}>
                         Edit
                     </button>
-                    <button className={styles.deleteBtn}>Delete</button>
+                    <button className={styles.deleteBtn} onClick={Delete}>
+                        Delete
+                    </button>
                 </div>
             </div>
         </div>
