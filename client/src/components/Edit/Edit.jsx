@@ -8,9 +8,11 @@ export const Edit = () => {
     const { user } = location.state || {};
     const navigate = useNavigate();
     const [userData, setUserData] = useState({
-        username: user?.username || "",
-        password: user?.password || "",
-        pasteinfo: user?.pasteinfo || "",
+        username: user.username,
+        password: user.password,
+        pasteinfo: user.pasteinfo,
+        fullname: user.fullname,
+        email: user.emailaddress,
     });
 
     const Save = () => {
@@ -33,7 +35,7 @@ export const Edit = () => {
                 });
             })
             .catch((err) => {
-                console.error("Failed to update user:", err);
+                console.error("Failed to update paste:", err);
             });
     };
 

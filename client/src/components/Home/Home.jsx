@@ -6,10 +6,12 @@ export const Home = () => {
     const location = useLocation();
     const { user } = location.state || {};
     const navigate = useNavigate();
-    const userData = {
+    const userDataDeletePaste = {
         username: user.username,
         password: user.password,
         pasteinfo: "",
+        fullname: user.fullname,
+        email: user.emailaddress,
     };
 
     const Edit = () => {
@@ -26,7 +28,7 @@ export const Home = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(userData),
+                body: JSON.stringify(userDataDeletePaste),
             })
                 .then((res) => {
                     if (!res.ok) {
@@ -37,7 +39,10 @@ export const Home = () => {
                 .then(() => {
                     navigate("/home", {
                         state: {
-                            user: { ...user, pasteinfo: userData.pasteinfo },
+                            user: {
+                                ...user,
+                                pasteinfo: userDataDeletePaste.pasteinfo,
+                            },
                         },
                     });
                 })

@@ -16,13 +16,16 @@ export const Login = () => {
                     (u) => u.username === username && u.password === password
                 );
                 if (user) {
-                    setNotification("Login Successful");
                     navigate("/home", { state: { user: user } });
                 } else {
                     setNotification("Username or Password is incorrect");
                 }
             })
             .catch((error) => console.error("Error fetching users: ", error));
+    };
+
+    const SignUp = () => {
+        navigate("/signup");
     };
 
     return (
@@ -47,21 +50,12 @@ export const Login = () => {
                     </div>
                     <div className={styles.links}>
                         <span>Forgot Password</span>
-                        <span>Sign up</span>
+                        <span onClick={SignUp}>Sign up</span>
                     </div>
                     <button className={styles.loginBtn} onClick={Login}>
                         Login
                     </button>
-                    <div>
-                        {notification === "Login Successful" ? (
-                            <div style={{ color: "green" }}>
-                                {" "}
-                                {notification}{" "}
-                            </div>
-                        ) : (
-                            <div style={{ color: "red" }}> {notification} </div>
-                        )}
-                    </div>
+                    <div className={styles.notification}>{notification}</div>
                 </div>
             </div>
         </div>
